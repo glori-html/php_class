@@ -10,11 +10,15 @@
 
 <body>
     <?php
-    echo __DIR__;
+
+    define('MY_CONSTANT', '3.14');
+    echo MY_CONSTANT;
+
+    echo __DIR__; //顯示檔案位置
     echo '<br>';
-    echo __FILE__;
+    echo __FILE__; //顯示檔案名稱
     echo '<br>';
-    echo __LINE__;
+    echo __LINE__; //偵測在code的第幾行(多數用來Debug)
     echo '<br>';
     ?>
 </body>
