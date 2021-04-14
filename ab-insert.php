@@ -1,20 +1,19 @@
-<?php include __DIR__. '/parts/config.php'; ?>
+<?php include __DIR__ . '/parts/config.php'; ?>
 <?php
 $title = '新增資料';
 $pageName = 'ab-insert';
 ?>
-<?php include __DIR__. '/parts/html-head.php'; ?>
-<?php include __DIR__. '/parts/navbar.php'; ?>
+<?php include __DIR__ . '/parts/html-head.php'; ?>
+<?php include __DIR__ . '/parts/navbar.php'; ?>
 <style>
     form .form-group small.error {
         color: red;
     }
-
 </style>
-<div class="container">
+<div class="container mt-5">
     <div class="row">
         <div class="col-md-6">
-            <div class="card" >
+            <div class="card">
 
                 <div class="card-body">
                     <h5 class="card-title">新增資料</h5>
@@ -32,8 +31,7 @@ $pageName = 'ab-insert';
                         </div>
                         <div class="form-group">
                             <label for="mobile">** 手機</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile"
-                                   pattern="09\d{2}-?\d{3}-?\d{3}">
+                            <input type="text" class="form-control" id="mobile" name="mobile" pattern="09\d{2}-?\d{3}-?\d{3}">
                             <small class="form-text error"></small>
                         </div>
                         <div class="form-group">
@@ -42,8 +40,7 @@ $pageName = 'ab-insert';
                         </div>
                         <div class="form-group">
                             <label for="address">地址</label>
-                            <textarea class="form-control" name="address" id="address"
-                                      cols="30" rows="3"></textarea>
+                            <textarea class="form-control" name="address" id="address" cols="30" rows="3"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">新增</button>
                     </form>
@@ -55,7 +52,7 @@ $pageName = 'ab-insert';
     </div>
 
 </div>
-<?php include __DIR__. '/parts/scripts.php'; ?>
+<?php include __DIR__ . '/parts/scripts.php'; ?>
 <script>
     const email_re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
@@ -67,35 +64,35 @@ $pageName = 'ab-insert';
 
     function checkForm() {
         // 回復原來的狀態
-        fileds.forEach(el=>{
+        fileds.forEach(el => {
             el.css('border', '1px solid #CCCCCC');
             el.next().text('');
         });
 
         let isPass = true;
 
-        if($name.val().length < 2){
+        if ($name.val().length < 2) {
             isPass = false;
             $name.css('border', '1px solid red');
             $name.next().text('請輸入正確的姓名');
         }
-        if(! email_re.test($email.val())){
+        if (!email_re.test($email.val())) {
             isPass = false;
             $email.css('border', '1px solid red');
             $email.next().text('請輸入正確的 email');
         }
-        if(! mobile_re.test($mobile.val())){
+        if (!mobile_re.test($mobile.val())) {
             isPass = false;
             $mobile.css('border', '1px solid red');
             $mobile.next().text('請輸入正確的手機號碼');
         }
 
-        if(isPass){
+        if (isPass) {
             $.post(
                 'ab-insert-api.php',
                 $(document.form1).serialize(),
-                function(data){
-                    if(data.success){
+                function(data) {
+                    if (data.success) {
                         alert('資料新增成功');
                     }
                 },
@@ -104,6 +101,5 @@ $pageName = 'ab-insert';
         }
 
     }
-
 </script>
-<?php include __DIR__. '/parts/html-foot.php'; ?>
+<?php include __DIR__ . '/parts/html-foot.php'; ?>

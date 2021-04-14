@@ -28,7 +28,6 @@
                 <div class="form-group">
                     <label for="myDate">Calendar</label>
                     <input type="date" class="form-control" id="password" value="<?= empty($_POST['myDate']) ? '' : htmlentities($_POST['myDate']) ?>" name="myDate">
-
                 </div>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1" name="check1">
