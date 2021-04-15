@@ -10,7 +10,7 @@ $pageName = 'ab-insert';
         color: red;
     }
 </style>
-<div class="container mt-5">
+<div class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="card">

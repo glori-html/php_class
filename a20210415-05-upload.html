@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+</head>
+
+<body>
+
+    <button class="btn btn-primary" onclick="avatar.click()">上傳</button>
+
+    <form name="form1" style="display: none">
+        <input type="file" name="avatar" id="avatar">
+    </form>
+
+    <img id="myimg" src="" alt="">
+
+    <script src="./lib/jquery-3.6.0.js"></script>
+    <script src="./bootstrap/js/bootstrap.bundle.js"></script>
+    <script>
+        const avatar = document.querySelector('#avatar');
+
+        avatar.addEventListener('change', function () {
+            const fd = new FormData(document.form1); //將有樣式的表單轉為只有表單資料並傳送給a20210415-03-upload.php
+
+            fetch('a20210415-03-upload.php', { //傳送的對象
+                method: 'POST', //傳送方式
+                body: fd //傳送的資料
+            })
+                .then(r => r.json()) //r = response 回傳成json格式
+                .then(obj => {
+                    if (obj.success) {
+                        document.querySelector('#myimg').src = 'imgs/' + obj.filename;
+                    }
+                })
+
+
+
+        });
+// FileReader 讓使用者先預覽 preview 後再進行上傳
+// https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
+    </script>
+</body>
+
+</html>
