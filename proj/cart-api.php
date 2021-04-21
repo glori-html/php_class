@@ -1,6 +1,6 @@
-<?php include __DIR__. '/parts/config.php';
+<?php include __DIR__ . '/parts/config.php';
 
-if(! isset($_SESSION['cart'])){
+if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
@@ -12,14 +12,14 @@ $action = isset($_GET['action']) ? $_GET['action'] : 'list'; // 操作的動作
 $pid = isset($_GET['pid']) ? intval($_GET['pid']) : 0; // 商品 id
 $qty = isset($_GET['qty']) ? intval($_GET['qty']) : 0;  // 數量
 
-switch($action){
+switch ($action) {
     case 'update':
     case 'add':
-        if(! empty($pid)){
-            if($qty > 0) {
+        if (!empty($pid)) {
+            if ($qty > 0) {
 
                 // 購物車內已經有這個商品資料
-                if(! empty($_SESSION['cart'][$pid])){
+                if (!empty($_SESSION['cart'][$pid])) {
                     $_SESSION['cart'][$pid]['quantity'] = $qty;
                 } else {
 
@@ -27,20 +27,18 @@ switch($action){
                     $sql = "SELECT * FROM products WHERE sid=$pid ";
                     $row = $pdo->query($sql)->fetch();
 
-                    if(! empty($row)){
+                    if (!empty($row)) {
                         $row['quantity'] = $qty;  // 把數量加入
                         $_SESSION['cart'][$row['sid']] = $row; // 放到購物車裡
                     }
                 }
-
-
             } else {
                 unset($_SESSION['cart'][$pid]); // 移除該項商品
             }
         }
         break;
     case 'delete':
-        if(! empty($pid)){
+        if (!empty($pid)) {
             unset($_SESSION['cart'][$pid]); // 移除該項商品
         }
         break;
@@ -49,11 +47,3 @@ switch($action){
 }
 
 echo json_encode($_SESSION['cart'], JSON_UNESCAPED_UNICODE);
-
-
-
-
-
-
-
-
